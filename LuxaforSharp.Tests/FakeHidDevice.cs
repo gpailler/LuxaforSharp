@@ -123,6 +123,11 @@ namespace LuxaforSharp.Tests
             get { throw new NotImplementedException(); }
         }
 
+        public IntPtr WriteHandle
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public bool IsOpen
         {
             get { throw new NotImplementedException(); }
@@ -227,6 +232,11 @@ namespace LuxaforSharp.Tests
         public bool WriteFeatureData(byte[] data)
         {
             throw new NotImplementedException();
+        }
+
+        public IntPtr ReadHandle
+        {
+            get { throw new NotImplementedException(); }
         }
 
         public void WriteReport(HidReport report, WriteCallback callback, int timeout)

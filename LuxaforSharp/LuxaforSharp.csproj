@@ -11,7 +11,7 @@
     <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="hidlibrary" Version="3.2.31.0" />
+    <PackageReference Include="hidlibrary" Version="3.3.40" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Data.DataSetExtensions" />
