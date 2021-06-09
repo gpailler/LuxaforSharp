@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using HidLibrary;
+using HidSharp;
 using LuxaforSharp.Commands;
 
 namespace LuxaforSharp
@@ -13,16 +14,18 @@ namespace LuxaforSharp
     /// </summary>
     public class Device : BaseDevice
     {
-        private readonly IHidDevice device;
+        private readonly HidDevice device;
+        private HidStream stream;
 
         public string DevicePath 
         {
             get { return this.device.DevicePath; } 
         }
 
-        public Device(IHidDevice device)
+        public Device(HidDevice device)
         {
             this.device = device;
+            this.stream = this.device.Open();
         }
         
         /// <summary>
@@ -30,7 +33,7 @@ namespace LuxaforSharp
         /// </summary>
         public override void Dispose()
         {
-            this.device.Dispose();
+            this.stream.Dispose();
         }
 
         /// <summary>
@@ -42,7 +45,16 @@ namespace LuxaforSharp
         /// <returns>Task representing the operation. Result is true if the message has been acknowledged, false otherwise</returns>
         public override Task<bool> SendCommand(ICommand command, int timeout = 0)
         {
-            return this.device.WriteAsync(command.Bytes, timeout);
+            var task = new Task<Task<bool>>(async () =>
+            {
+                this.stream.WriteTimeout = timeout == 0 ? Timeout.Infinite : timeout;
+                await this.stream.WriteAsync(command.Bytes, 0, command.Bytes.Length);
+                return true;
+            });
+
+            task.Start();
+            task.Wait();
+            return task.Result;
         }
     }
 }

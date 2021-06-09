@@ -11,6 +11,6 @@
     <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="hidlibrary" Version="3.3.40" />
+    <PackageReference Include="HidSharp" Version="2.1.0" />
   </ItemGroup>
 </Project>

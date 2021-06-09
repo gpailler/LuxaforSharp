@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HidLibrary;
 using LuxaforSharp.Commands;
 
 namespace LuxaforSharp
@@ -12,8 +11,8 @@ namespace LuxaforSharp
     {
         public const int VendorId = 0x04D8;
         public const int ProductId = 0xF372;
-        
-        private IHidEnumerator hidEnumerator;
+
+        private HidSharp.DeviceList hidDeviceList;
         private IList<Device> devices = new List<Device>();
         private object lockObject = new object();
 
@@ -43,20 +42,20 @@ namespace LuxaforSharp
             }
         }
 
-        public DeviceList(IHidEnumerator hidEnumerator)
+        public DeviceList(HidSharp.DeviceList hidDeviceList)
         {
-            this.hidEnumerator = hidEnumerator;
+            this.hidDeviceList = hidDeviceList;
         }
 
         public DeviceList() :
-            this(new HidEnumerator())
+            this(HidSharp.DeviceList.Local)
         { }
 
         public void Scan()
         {
             lock (lockObject)
             {
-                var currentHidDevices = this.hidEnumerator.Enumerate(VendorId, ProductId).ToList();
+                var currentHidDevices = this.hidDeviceList.GetHidDevices(VendorId, ProductId).ToList();
 
                 var results = this.devices.Differences(currentHidDevices, (device, hidDevice) => device.DevicePath == hidDevice.DevicePath);
 
