@@ -1,0 +1,20 @@
+<Project>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+
+    <Company>Edouard Paumier</Company>
+    <Product>LuxaforSharp</Product>
+    <Description>Library providing a simple API to control Luxafor devices</Description>
+    <Copyright>Copyright © 2015</Copyright>
+    <Version>2.0.0.0</Version>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <Authors>Edouard Paumier</Authors>
+    <PackageLicenseUrl>https://github.com/Duncan-Idaho/LuxaforSharp/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Duncan-Idaho/LuxaforSharp</PackageProjectUrl>
+    <PackageReleaseNotes>First version oft the product.</PackageReleaseNotes>
+    <PackageTags>Luxafor HID</PackageTags>
+
+  </PropertyGroup>
+</Project>
